@@ -23,6 +23,28 @@
         <div class="loader-logo">TG</div>
         <p>Initializing TechGeng...</p>
     </div>
+    <script>
+        // TechGeng loader failsafe: never allow the loading screen to block the site.
+        (function () {
+            function hideTechGengLoader() {
+                var loader = document.getElementById('pageLoader');
+                if (!loader) return;
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                loader.style.pointerEvents = 'none';
+                loader.setAttribute('aria-hidden', 'true');
+                setTimeout(function () { loader.style.display = 'none'; }, 450);
+            }
+
+            // Give the loader a short branded moment, then reveal the website.
+            setTimeout(hideTechGengLoader, 1400);
+
+            // Extra fallback for slow/erroring external JavaScript.
+            window.addEventListener('load', function () {
+                setTimeout(hideTechGengLoader, 250);
+            });
+        })();
+    </script>
     <div class="noise-layer"></div>
     <div class="grid-background"></div>
     <div class="ambient-glow glow-a"></div>
