@@ -948,8 +948,7 @@
                             .from("enquiries")
                             .insert([
                                 enquiry
-                            ])
-                            .select();
+                            ]);
 
 
                     /*
