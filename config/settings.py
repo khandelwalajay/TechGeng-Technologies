@@ -44,12 +44,10 @@ DEBUG = os.getenv(
 # ============================================================
 
 ALLOWED_HOSTS = [
-    x.strip()
-    for x in os.getenv(
-        "DJANGO_ALLOWED_HOSTS",
-        "127.0.0.1,localhost,tech-geng-technologies.vercel.app"
-    ).split(",")
-    if x.strip()
+    "127.0.0.1",
+    "localhost",
+    "127.0.0.1:8000",
+    ".vercel.app",
 ]
 
 
