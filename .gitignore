@@ -1,6 +1,7 @@
-__pycache__/
-*.py[cod]
-*.sqlite3
+.vscode/
 .env
+.env.*
+!.env.example
+node_modules/
 .venv/
-staticfiles/
+__pycache__/
