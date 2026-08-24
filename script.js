@@ -698,8 +698,7 @@
                         "Please enter your email.",
                         "error"
                     );
-
-                    $("#contactEmail")?.focus();
+                                        $("#contactEmail")?.focus();
 
                     return;
 
@@ -839,43 +838,56 @@
 
                     /* =====================================
                        STEP 2
-                       SEND EMAIL THROUGH EDGE FUNCTION
+                       SEND EMAIL THROUGH WEB3FORMS
                     ===================================== */
 
-                    const {
-                        data: emailData,
-                        error: emailError
-                    } =
-                        await db.functions.invoke(
-                            "send-enquiry-email",
+                    // Customer can reply directly from the notification email.
+                    const replyToInput = $("#contactReplyTo");
+
+                    if (replyToInput) {
+                        replyToInput.value = email;
+                    }
+
+                    const web3Response =
+                        await fetch(
+                            "https://api.web3forms.com/submit",
                             {
-                                body: {
-                                    name: name,
-                                    email: email,
-                                    phone: phone,
-                                    message: message
-                                }
+                                method: "POST",
+                                body: formData
                             }
                         );
 
+                    let web3Result = {};
 
-                    if (emailError) {
-
+                    try {
+                        web3Result =
+                            await web3Response.json();
+                    } catch (parseError) {
                         console.error(
-                            "Email sending error:",
-                            emailError
+                            "Web3Forms response could not be parsed:",
+                            parseError
                         );
-
-                        throw emailError;
-
                     }
 
+                    if (
+                        !web3Response.ok ||
+                        !web3Result.success
+                    ) {
+                        console.error(
+                            "Web3Forms email error:",
+                            web3Result
+                        );
+
+                        throw new Error(
+                            web3Result.message ||
+                            "Email notification could not be sent."
+                        );
+                    }
 
                     console.log(
-                        "Email sent successfully:",
-                        emailData
+                        "Email sent successfully through Web3Forms:",
+                        web3Result
                     );
-
 
                     /* =====================================
                        SUCCESS
