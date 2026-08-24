@@ -44,7 +44,7 @@
     } else {
 
         console.warn(
-            "Supabase is not configured. Product database and enquiry database are unavailable."
+            "Supabase is not configured."
         );
 
     }
@@ -55,9 +55,7 @@
     ===================================================== */
 
     function $(selector) {
-
         return document.querySelector(selector);
-
     }
 
 
@@ -80,26 +78,16 @@
             price === undefined ||
             price === ""
         ) {
-
             return "Contact for price";
-
         }
-
 
         const number = Number(price);
 
-
         if (Number.isNaN(number)) {
-
             return "Contact for price";
-
         }
 
-
-        return (
-            "₹" +
-            number.toLocaleString("en-IN")
-        );
+        return "₹" + number.toLocaleString("en-IN");
 
     }
 
@@ -110,24 +98,18 @@
             return;
         }
 
-
         element.textContent = message;
-
 
         element.classList.remove(
             "success",
             "error"
         );
 
-
         if (type) {
-
             element.classList.add(type);
-
         }
 
     }
-
 
 
     /* =====================================================
@@ -135,7 +117,6 @@
     ===================================================== */
 
     const yearElement = $("#year");
-
 
     if (yearElement) {
 
@@ -145,15 +126,12 @@
     }
 
 
-
     /* =====================================================
        MOBILE MENU
     ===================================================== */
 
     const menuButton = $("#menu");
-
     const navigation = $("#nav");
-
 
     if (
         menuButton &&
@@ -192,7 +170,6 @@
     }
 
 
-
     /* =====================================================
        PRODUCT SYSTEM
     ===================================================== */
@@ -204,113 +181,53 @@
 
         {
             id: "demo-1",
-
-            name:
-                "ESP32 Development Board",
-
-            category:
-                "IoT",
-
-            price:
-                799,
-
+            name: "ESP32 Development Board",
+            category: "IoT",
+            price: 799,
             description:
                 "Wi-Fi and Bluetooth development board for connected IoT projects.",
-
-            image_url:
-                "",
-
-            featured:
-                true,
-
-            active:
-                true
-
+            image_url: "",
+            featured: true,
+            active: true
         },
-
 
         {
             id: "demo-2",
-
-            name:
-                "Arduino UNO R3",
-
-            category:
-                "Arduino",
-
-            price:
-                599,
-
+            name: "Arduino UNO R3",
+            category: "Arduino",
+            price: 599,
             description:
                 "Popular microcontroller development board for electronics and automation projects.",
-
-            image_url:
-                "",
-
-            featured:
-                false,
-
-            active:
-                true
-
+            image_url: "",
+            featured: false,
+            active: true
         },
-
 
         {
             id: "demo-3",
-
-            name:
-                "IoT Sensor Starter Kit",
-
-            category:
-                "IoT",
-
-            price:
-                1299,
-
+            name: "IoT Sensor Starter Kit",
+            category: "IoT",
+            price: 1299,
             description:
                 "Starter kit for sensor-based monitoring, automation and learning projects.",
-
-            image_url:
-                "",
-
-            featured:
-                true,
-
-            active:
-                true
-
+            image_url: "",
+            featured: true,
+            active: true
         },
-
 
         {
             id: "demo-4",
-
-            name:
-                "Custom Engineering Project",
-
-            category:
-                "Projects",
-
-            price:
-                null,
-
+            name: "Custom Engineering Project",
+            category: "Projects",
+            price: null,
             description:
                 "Custom electronics, IoT, embedded and engineering project development.",
-
-            image_url:
-                "",
-
-            featured:
-                false,
-
-            active:
-                true
-
+            image_url: "",
+            featured: false,
+            active: true
         }
 
     ];
-
 
 
     /* =====================================================
@@ -405,7 +322,6 @@
     }
 
 
-
     /* =====================================================
        RENDER PRODUCTS
     ===================================================== */
@@ -426,9 +342,7 @@
 
 
         if (!productGrid) {
-
             return;
-
         }
 
 
@@ -497,7 +411,6 @@
     }
 
 
-
     /* =====================================================
        PRODUCT CATEGORIES
     ===================================================== */
@@ -509,9 +422,7 @@
 
 
         if (!category) {
-
             return;
-
         }
 
 
@@ -549,7 +460,6 @@
     }
 
 
-
     /* =====================================================
        LOAD PRODUCTS
     ===================================================== */
@@ -559,12 +469,6 @@
         const status =
             $("#productStatus");
 
-
-        /*
-            If Supabase is not configured,
-            show demo products instead of breaking
-            the entire website.
-        */
 
         if (!db) {
 
@@ -581,7 +485,6 @@
 
 
             populateCategories();
-
             renderProducts();
 
             return;
@@ -611,9 +514,7 @@
 
 
             if (result.error) {
-
                 throw result.error;
-
             }
 
 
@@ -639,7 +540,6 @@
 
 
             populateCategories();
-
             renderProducts();
 
 
@@ -650,11 +550,6 @@
                 error
             );
 
-
-            /*
-                Website should still work even if
-                database temporarily fails.
-            */
 
             products =
                 demoProducts;
@@ -669,13 +564,11 @@
 
 
             populateCategories();
-
             renderProducts();
 
         }
 
     }
-
 
 
     /* =====================================================
@@ -696,7 +589,6 @@
     }
 
 
-
     /* =====================================================
        PRODUCT CATEGORY FILTER
     ===================================================== */
@@ -715,24 +607,9 @@
     }
 
 
-
     /* =====================================================
        CONTACT / ENQUIRY FORM
-       
-       IMPORTANT:
-       There is NO mailto redirect here.
-       
-       Form:
-       
-       Website
-          ↓
-       JavaScript
-          ↓
-       Supabase
-          ↓
-       enquiries table
-       
-       ===================================================== */
+    ===================================================== */
 
     const contactForm =
         $("#contactForm");
@@ -744,13 +621,12 @@
             "submit",
             async function (event) {
 
-                /*
-                    MOST IMPORTANT LINE.
-                    Prevents browser reload.
-                */
+
+                /* =========================================
+                   STOP PAGE RELOAD
+                ========================================= */
 
                 event.preventDefault();
-
                 event.stopPropagation();
 
 
@@ -762,9 +638,9 @@
                     $("#contactNote");
 
 
-                /*
-                    Read form values.
-                */
+                /* =========================================
+                   READ FORM VALUES
+                ========================================= */
 
                 const formData =
                     new FormData(
@@ -794,7 +670,6 @@
                     String(
                         formData.get("message") || ""
                     ).trim();
-
 
 
                 /* =========================================
@@ -831,10 +706,6 @@
                 }
 
 
-                /*
-                    Basic email validation.
-                */
-
                 const emailPattern =
                     /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -869,7 +740,6 @@
                 }
 
 
-
                 /* =========================================
                    SUPABASE CHECK
                 ========================================= */
@@ -890,7 +760,6 @@
                     return;
 
                 }
-
 
 
                 /* =========================================
@@ -914,34 +783,34 @@
                 );
 
 
-
                 /* =========================================
                    DATABASE OBJECT
                 ========================================= */
 
                 const enquiry = {
 
-                    name:
-                        name,
+                    name: name,
 
-                    email:
-                        email,
+                    email: email,
 
-                    phone:
-                        phone,
+                    phone: phone,
 
-                    message:
-                        message
+                    message: message
 
                 };
 
 
+                /* =========================================
+                   SUBMIT
+                ========================================= */
 
                 try {
 
-                    /*
-                        Insert enquiry into Supabase.
-                    */
+
+                    /* =====================================
+                       STEP 1
+                       SAVE ENQUIRY IN SUPABASE
+                    ===================================== */
 
                     const result =
                         await db
@@ -950,10 +819,6 @@
                                 enquiry
                             ]);
 
-
-                    /*
-                        Check Supabase error.
-                    */
 
                     if (result.error) {
 
@@ -968,8 +833,47 @@
 
 
                     console.log(
-                        "Enquiry successfully submitted:",
-                        result.data
+                        "Enquiry successfully saved."
+                    );
+
+
+                    /* =====================================
+                       STEP 2
+                       SEND EMAIL THROUGH EDGE FUNCTION
+                    ===================================== */
+
+                    const {
+                        data: emailData,
+                        error: emailError
+                    } =
+                        await db.functions.invoke(
+                            "send-enquiry-email",
+                            {
+                                body: {
+                                    name: name,
+                                    email: email,
+                                    phone: phone,
+                                    message: message
+                                }
+                            }
+                        );
+
+
+                    if (emailError) {
+
+                        console.error(
+                            "Email sending error:",
+                            emailError
+                        );
+
+                        throw emailError;
+
+                    }
+
+
+                    console.log(
+                        "Email sent successfully:",
+                        emailData
                     );
 
 
@@ -983,11 +887,6 @@
                         "success"
                     );
 
-
-                    /*
-                        Clear form after successful
-                        database submission.
-                    */
 
                     contactForm.reset();
 
@@ -1003,10 +902,6 @@
                     let errorMessage =
                         "Something went wrong while submitting your enquiry.";
 
-
-                    /*
-                        Helpful error messages.
-                    */
 
                     if (
                         error &&
@@ -1030,9 +925,10 @@
 
                 } finally {
 
-                    /*
-                        Re-enable button.
-                    */
+
+                    /* =====================================
+                       ENABLE BUTTON AGAIN
+                    ===================================== */
 
                     if (submitButton) {
 
@@ -1056,7 +952,6 @@
         );
 
     }
-
 
 
     /* =====================================================
@@ -1084,9 +979,7 @@
                             !targetID ||
                             targetID === "#"
                         ) {
-
                             return;
-
                         }
 
 
@@ -1097,9 +990,7 @@
 
 
                         if (!target) {
-
                             return;
-
                         }
 
 
@@ -1118,7 +1009,6 @@
 
             }
         );
-
 
 
     /* =====================================================
