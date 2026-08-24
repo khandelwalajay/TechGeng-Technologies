@@ -1,0 +1,1 @@
+const m=document.getElementById("menu"),n=document.getElementById("nav");if(m)m.onclick=()=>n.classList.toggle("open");setTimeout(()=>document.querySelectorAll(".messages").forEach(x=>x.remove()),6000);
